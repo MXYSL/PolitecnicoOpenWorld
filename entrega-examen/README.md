@@ -1,176 +1,149 @@
-\# Primer examen parcial - Pull Request con QA
+# First Partial Exam - Pull Request with QA
 
+## General information
 
+**Student:** Mayra Solis Lugo  
+**GitHub:** MXYSL  
+**Project:** PolitecnicoOpenWorld  
+**Implementation branch:** `fix/game-feedback-and-exit-flow`  
+**Academic delivery branch:** `exam1-delivery`
 
-\## Datos generales
+## Objective
 
+Prepare, test, document, and submit a small Android contribution to PolitecnicoOpenWorld through a Pull Request with reproducible QA evidence.
 
+## Contribution scope
 
-\*\*Alumno:\*\* Mayra Solis Lugo
+This contribution contains two focused interaction improvements:
 
-\*\*Equipo:\*\*   
+1. Clarify the Settings exit action by replacing the generic `BACK / VOLVER` label with `EXIT TO MENU / SALIR AL MENÚ`.
+2. Add sound feedback when selecting a character before starting a new Story Mode game.
 
-\*\*GitHub:\*\* MXYSL  
+Out of scope: Story Mode save logic, character movement, new audio assets, navigation redesign, and multiplayer changes.
 
-\*\*Proyecto:\*\* PolitecnicoOpenWorld  
+## Issue
 
+[MXYSL/PolitecnicoOpenWorld#2](https://github.com/MXYSL/PolitecnicoOpenWorld/issues/2)
 
+## Pull Request
 
-\## Objetivo
+[gabrielhuav/PolitecnicoOpenWorld#177](https://github.com/gabrielhuav/PolitecnicoOpenWorld/pull/177)
 
+## Before / After
 
+### Change 1 - Settings exit action
 
-Preparar, probar y someter a revisión una contribución pequeña al proyecto PolitecnicoOpenWorld mediante un Pull Request con aseguramiento de calidad reproducible.
+| Before | After - English | After - Spanish |
+| --- | --- | --- |
+| The bottom action displayed `BACK` / `VOLVER`, even though it exits to the Main Menu. | <img src="evidencias/TC01_exit_to_menu_en.png" width="360" alt="EXIT TO MENU in English"> | <img src="evidencias/TC02_salir_al_menu_es.png" width="360" alt="SALIR AL MENÚ in Spanish"> |
 
+The navigation behavior was intentionally preserved. Only the label was clarified so the action matches what the button actually does.
 
+### Change 2 - Character-selection feedback
 
-\## Alcance
+| Before | After |
+| --- | --- |
+| Selecting a character continued to the save-slot screen without a dedicated confirmation sound. | [TC-05 - Character selection with sound](evidencias/TC05_character_sound.mp4) |
 
+The implementation reuses the existing item sound through `SoundManager`; no new audio asset was added.
 
+A limit-condition test also confirms that character selection still works when SFX volume is zero:
 
-La contribución contiene dos mejoras:
+[TC-06 - Character selection with SFX = 0](evidencias/TC06_sfx_zero.mp4)
 
+## Additional visual QA evidence
 
+### Portrait layout
 
-1\. Clarificación del botón de salida de Settings mediante `EXIT TO MENU / SALIR AL MENÚ`.
+<img src="evidencias/TC08_portrait.png" width="360" alt="Settings screen in portrait orientation">
 
-2\. Retroalimentación sonora al seleccionar un personaje.
+### Navigation evidence
 
+- [TC-03 - Top Back returns to Free Roam](evidencias/TC03_back_to_free_roam.webm)
+- [TC-04 - Exit to Menu from Free Roam](evidencias/TC04_exit_free_roam.mp4)
 
+## Versions
 
-\## Issue
-
-
-
-https://github.com/MXYSL/PolitecnicoOpenWorld/issues/2
-
-
-
-\## Pull Request
-
-
-
-\[URL DEL PR]
-
-
-
-\## Versiones
-
-
-
-\*\*SHA base:\*\*  
-
+**Base SHA:**  
 `7ed325393f82872c2be94ff2ada46948efa19152`
 
-
-
-\*\*SHA de implementación probado:\*\*  
-
+**Tested implementation SHA:**  
 `f808274d6cf4c2d872a92f474db79abaab68811a`
 
+The academic-delivery branch contains documentation/evidence commits after the tested implementation SHA. Those commits do not modify application behavior.
 
+## Implementation commits
 
-\## Commits de implementación
+- `a825da84` - `fix: clarify settings exit action`
+- `f808274d` - `feat: add sound feedback to character selection`
 
+## QA
 
+[Open the full QA matrix and test results](docs/pruebas.md)
 
-\- `a825da84` - `fix: clarify settings exit action`
+The manual QA plan covers:
 
-\- `f808274d` - `feat: add sound feedback to character selection`
+- Happy path
+- Alternate / limit condition
+- Regression
+- Navigation and state
+- Accessibility
+- Compatibility / environment
 
+## Test environment
 
+- Windows 11
+- Android Studio Quail 4 | 2026.1.4
+- Android Studio build: AI-261.26222.65.2614.16204760
+- Android Studio Runtime: OpenJDK 25.0.3
+- Local Gradle JDK: Amazon Corretto 25.0.4.1
+- Gradle 9.5.0
+- Pixel 8 AVD
+- Android 17
+- API 37
+- x86_64
 
-\## QA
+## Local automated verification
 
+Command executed from the internal `PolitecnicoOpenWorld` Gradle project:
 
+```powershell
+.\gradlew.bat :app:assembleDebug :app:testDebugUnitTest :shared:testAndroidHostTest --stacktrace
+```
 
-\[Matriz y resultados de pruebas](docs/pruebas.md)
+Result:
 
+```text
+BUILD SUCCESSFUL in 21s
+79 actionable tasks: 10 executed, 69 up-to-date
+```
 
+## CI / Checks
 
-Las pruebas incluyen:
+PR Quality Gate: [PR #177 Checks](https://github.com/gabrielhuav/PolitecnicoOpenWorld/pull/177/checks)
 
+For tested implementation SHA `f808274d6cf4c2d872a92f474db79abaab68811a`, GitHub registered PR Quality Gate run **#179**. The run is currently reported as **action_required** and contains no executed jobs, so it is documented as an external CI/authorization condition rather than as a passing CI result.
 
+Local Gradle verification completed successfully as documented above.
 
-\- ruta feliz;
+## Technical review
 
-\- condición alterna/límite;
+Peer review is recorded in the Pull Request conversation/review once a reviewer reproduces at least one identified QA case.
 
-\- regresión;
+## Conclusion
 
-\- navegación y estado;
+The two interaction changes were tested on the documented Android environment. The tested scenarios confirm that the Settings exit label now communicates the actual navigation behavior and that character selection provides sound feedback without making the selection flow dependent on audible SFX.
 
-\- accesibilidad;
+No blocking regression was observed in the executed manual QA cases.
 
-\- compatibilidad/entorno.
+## AI tool disclosure
 
+ChatGPT was used to support:
 
+- interpretation of the exam requirements;
+- QA-plan structure;
+- acceptance-criteria and risk organization;
+- Git/GitHub workflow guidance;
+- technical-documentation drafting.
 
-\## Evidencias
-
-
-
-Las evidencias se encuentran en:
-
-
-
-\[evidencias/](evidencias/)
-
-
-
-\## Verificación local
-
-
-
-Se ejecutó:
-
-
-
-`.\\gradlew.bat :app:assembleDebug :app:testDebugUnitTest :shared:testAndroidHostTest --stacktrace`
-
-
-
-Resultado:
-
-
-
-`BUILD SUCCESSFUL in 21s`
-
-
-
-\## CI / Checks
-
-
-
-Revisar los Checks del Pull Request:
-
-
-
-\[URL DEL PR]/checks
-
-
-
-\## Revisión técnica
-
-
-
-Pendiente de registrar el enlace al comentario/review realizado por un compañero.
-
-
-
-\## Conclusión
-
-
-
-Los cambios fueron evaluados mediante ocho casos manuales y las verificaciones automáticas locales del proyecto.
-
-
-
-Los criterios de aceptación fueron satisfechos en el entorno documentado y no se detectaron regresiones bloqueantes durante la ejecución realizada.
-
-
-
-
-
-La implementación, ejecución de pruebas y evidencias fueron realizadas y verificadas por el alumno.
-
+Implementation execution, test execution, observations, and evidence capture were performed and verified by the student.
