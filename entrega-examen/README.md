@@ -212,7 +212,11 @@ The confirmation sound was reproduced successfully and the selection flow contin
 
 ### Video Evidence
 
-<!-- Drag TC05_character_sound.mp4 here in GitHub edit mode -->
+https://github.com/user-attachments/assets/49db23f0-bcf1-4def-99fb-2d7cec16a357
+
+
+https://github.com/user-attachments/assets/166c73ac-156d-4a4c-8c9d-7f8edd537b6d
+
 
 ---
 
@@ -236,7 +240,7 @@ No sound was audible and the application continued normally to the save-slot sel
 
 ### Video Evidence
 
-<!-- Drag TC06_sfx_zero.mp4 here in GitHub edit mode -->
+https://github.com/user-attachments/assets/808284b2-c4ba-480f-aaa2-9bfb105f27cf
 
 ---
 
@@ -262,7 +266,7 @@ The application returned correctly to Free Roam.
 
 ### Video Evidence
 
-<!-- Drag TC03_back_to_free_roam.webm here in GitHub edit mode -->
+[TC03_back_to_free_roam.webm](https://github.com/user-attachments/assets/b1987b28-60b2-4c0a-ac61-c2f2693d49b8)
 
 ---
 
@@ -302,18 +306,7 @@ The application navigated correctly to the Main Menu.
 
 ---
 
-# Acceptance Criteria
 
-| ID | Acceptance Criterion | Result |
-| --- | --- | --- |
-| AC-01 | Settings displays `EXIT TO MENU` in English. | PASSED |
-| AC-02 | Settings displays `SALIR AL MENÚ` in Spanish. | PASSED |
-| AC-03 | The bottom exit control continues navigating to the Main Menu. | PASSED |
-| AC-04 | The top Back arrow continues returning to the previous gameplay screen. | PASSED |
-| AC-05 | Selecting a character with SFX enabled plays a confirmation sound. | PASSED |
-| AC-06 | Selecting a character with SFX set to zero continues normally. | PASSED |
-
----
 
 # QA Test Matrix
 
