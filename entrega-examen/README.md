@@ -37,7 +37,7 @@ Out of scope: Story Mode save logic, character movement, new audio assets, navig
 | --- | --- | --- |
 | The bottom action displayed `BACK` / `VOLVER`, even though it exits to the Main Menu. | <img src="evidencias/TC01_exit_to_menu_en.png" width="360" alt="EXIT TO MENU in English"> | <img src="evidencias/TC02_salir_al_menu_es.png" width="360" alt="SALIR AL MENÚ in Spanish"> |
 
-The navigation behavior was intentionally preserved. Only the label was clarified so the action matches what the button actually does.
+The navigation behavior was preserved. The label now describes the action performed by the control.
 
 ### Change 2 - Character-selection feedback
 
@@ -47,17 +47,11 @@ The navigation behavior was intentionally preserved. Only the label was clarifie
 
 The implementation reuses the existing item sound through `SoundManager`; no new audio asset was added.
 
-A limit-condition test also confirms that character selection still works when SFX volume is zero:
+Limit-condition evidence:
 
 [TC-06 - Character selection with SFX = 0](evidencias/TC06_sfx_zero.mp4)
 
-## Additional visual QA evidence
-
-### Portrait layout
-
-<img src="evidencias/TC08_portrait.png" width="360" alt="Settings screen in portrait orientation">
-
-### Navigation evidence
+## Navigation evidence
 
 - [TC-03 - Top Back returns to Free Roam](evidencias/TC03_back_to_free_roam.webm)
 - [TC-04 - Exit to Menu from Free Roam](evidencias/TC04_exit_free_roam.mp4)
@@ -81,14 +75,15 @@ The academic-delivery branch contains documentation/evidence commits after the t
 
 [Open the full QA matrix and test results](docs/pruebas.md)
 
-The manual QA plan covers:
+Six manual test cases were retained, covering:
 
 - Happy path
-- Alternate / limit condition
+- Limit condition
 - Regression
 - Navigation and state
-- Accessibility
-- Compatibility / environment
+- Compatibility / environment through language configuration
+
+A dedicated large-font / TalkBack accessibility scenario is listed as a remaining limitation and is not claimed as verified.
 
 ## Test environment
 
@@ -122,7 +117,7 @@ BUILD SUCCESSFUL in 21s
 
 PR Quality Gate: [PR #177 Checks](https://github.com/gabrielhuav/PolitecnicoOpenWorld/pull/177/checks)
 
-For tested implementation SHA `f808274d6cf4c2d872a92f474db79abaab68811a`, GitHub registered PR Quality Gate run **#179**. The run is currently reported as **action_required** and contains no executed jobs, so it is documented as an external CI/authorization condition rather than as a passing CI result.
+For tested implementation SHA `f808274d6cf4c2d872a92f474db79abaab68811a`, GitHub registered PR Quality Gate run **#179**. The run is reported as **action_required** and contains no executed jobs, so it is documented as an external CI/authorization condition rather than as a passing CI result.
 
 Local Gradle verification completed successfully as documented above.
 
@@ -132,9 +127,9 @@ Peer review is recorded in the Pull Request conversation/review once a reviewer 
 
 ## Conclusion
 
-The two interaction changes were tested on the documented Android environment. The tested scenarios confirm that the Settings exit label now communicates the actual navigation behavior and that character selection provides sound feedback without making the selection flow dependent on audible SFX.
+The two interaction changes were tested on the documented Android environment. The executed scenarios confirm that the Settings exit label now communicates the actual navigation behavior and that character selection provides sound feedback without making the selection flow dependent on audible SFX.
 
-No blocking regression was observed in the executed manual QA cases.
+No blocking regression was observed in the executed cases.
 
 ## AI tool disclosure
 
