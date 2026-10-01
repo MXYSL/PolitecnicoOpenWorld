@@ -289,8 +289,8 @@ The application navigated correctly to the Main Menu.
 **Status:** `PASSED`
 
 ### Video Evidence
+https://github.com/user-attachments/assets/2478f92e-c3e1-492f-ac38-2c1fe097f91d
 
-<!-- Drag TC04_exit_free_roam.mp4 here in GitHub edit mode -->
 
 ---
 
